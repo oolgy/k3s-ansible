@@ -20,4 +20,3 @@
         msg: "Rebooting after hostname change"
         pre_reboot_delay: 0  
         post_reboot_delay: 100
-      when: hostname_change.changed
