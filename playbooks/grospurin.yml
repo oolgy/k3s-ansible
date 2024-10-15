@@ -13,7 +13,6 @@
     - name: Change the hostname
       ansible.builtin.hostname:
         name: "{{ new_hostname }}"
-      register: hostname_change
 
     - name: Reboot the machine if hostname was changed
       ansible.builtin.reboot:
