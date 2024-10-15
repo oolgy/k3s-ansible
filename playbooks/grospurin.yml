@@ -1,0 +1,23 @@
+---
+- name: Change hostname
+  hosts: k3s_cluster
+
+  tasks:
+    - name: Gather facts
+      ansible.builtin.setup:
+
+    - name: Construct new hostname
+      set_fact:
+        new_hostname: "{{ ansible_hostname }}"
+
+    - name: Change the hostname
+      ansible.builtin.hostname:
+        name: "{{ new_hostname }}"
+      register: hostname_change
+
+    - name: Reboot the machine if hostname was changed
+      ansible.builtin.reboot:
+        msg: "Rebooting after hostname change"
+        pre_reboot_delay: 0  
+        post_reboot_delay: 100
+      when: hostname_change.changed
