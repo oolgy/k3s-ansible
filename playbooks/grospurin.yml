@@ -6,13 +6,9 @@
     - name: Gather facts
       ansible.builtin.setup:
 
-    - name: Construct new hostname
-      set_fact:
-        new_hostname: "{{ ansible_hostname }}"
-
     - name: Change the hostname
       ansible.builtin.hostname:
-        name: "{{ new_hostname }}"
+        name: "{{ inventory_hostname }}"
 
     - name: Reboot the machine if hostname was changed
       ansible.builtin.reboot:
